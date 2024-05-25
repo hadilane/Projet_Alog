@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'captcha',
     'api_users.apps.UsersConfig',
     'Projects.apps.ProjectsConfig',
+    'django_elasticsearch_dsl',
     
 ]
 
@@ -138,6 +139,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+ELASTICSEARCH_DSL={
+'default': {
+'hosts': 'http://localhost:9200',
+'timeout': 60,  # Custom timeout
+'http_auth': ('hadilane', '123456789')
+}
+}
 
 
 # Internationalization

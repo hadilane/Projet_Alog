@@ -26,6 +26,12 @@
     <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <style>
+        .highlight {
+            border: 2px solid yellow;
+            box-shadow: 0px 0px 10px yellow;
+        }
+    </style>
 </head>
 
 <body>
@@ -136,10 +142,10 @@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
+                            <form id="searchForm" action="{% url 'search_projects' %}" method="POST">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
+                                        <input type="text" name="query" class="form-control" placeholder='Search Keyword'
                                             onfocus="this.placeholder = ''"
                                             onblur="this.placeholder = 'Search Keyword'">
                                         <div class="input-group-append">
@@ -154,151 +160,32 @@
 
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Category</h4>
-                            <ul class="list cat-list">
+                            <ul id="categoryList" class="list cat-list">
+                                <!-- {% for category in categories %}
                                 <li>
                                     <a href="#" class="d-flex">
-                                        <p>Resaurant food</p>
-                                        <p>(37)</p>
+                                        <p>{{ category.name }}</p>
+                                        <p>({{ category.projects.count }})</p>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Travel news</p>
-                                        <p>(10)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Modern technology</p>
-                                        <p>(03)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Product</p>
-                                        <p>(11)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Inspiration</p>
-                                        <p>21</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Health Care (21)</p>
-                                        <p>09</p>
-                                    </a>
-                                </li>
+                                {% endfor %} -->
                             </ul>
                         </aside>
 
-                        <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Recent Post</h3>
-                            <div class="media post_item">
-                                <img src="{% static 'img/post/post_1.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>From life was you fish...</h3>
-                                    </a>
-                                    <p>January 12, 2019</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="{% static 'img/post/post_2.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="{% static 'img/post/post_3.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="{% static 'img/post/post_4.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
-                        </aside>
+                        
                         <aside class="single_sidebar_widget tag_cloud_widget">
-                            <h4 class="widget_title">Tag Clouds</h4>
-                            <ul class="list">
+                            <h4 class="widget_title">Types</h4>
+                            <ul id="typeList" class="list">
+                                <!-- {% for type in types %}
                                 <li>
-                                    <a href="#">project</a>
+                                    <a href="#">{{ type.type_name }}</a>
                                 </li>
-                                <li>
-                                    <a href="#">love</a>
-                                </li>
-                                <li>
-                                    <a href="#">technology</a>
-                                </li>
-                                <li>
-                                    <a href="#">travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">restaurant</a>
-                                </li>
-                                <li>
-                                    <a href="#">life style</a>
-                                </li>
-                                <li>
-                                    <a href="#">design</a>
-                                </li>
-                                <li>
-                                    <a href="#">illustration</a>
-                                </li>
+                                {% endfor %} -->
                             </ul>
                         </aside>
 
 
-                        <aside class="single_sidebar_widget instagram_feeds">
-                            <h4 class="widget_title">Instagram Feeds</h4>
-                            <ul class="instagram_row flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_5.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_6.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_7.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_8.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_9.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_10.png' %}" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </aside>
+                        
 
 
                         <aside class="single_sidebar_widget newsletter_widget">
@@ -317,18 +204,17 @@
                 </div>
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
-                        <div class="row">
+                        <div class="row" id="projectResults">
+                            <!-- Dynamic Project Results will be inserted here -->
                             {% for project in projects %}
                             <div class="col-md-6">
                                 <article class="blog_item">
                                     <div class="blog_item_img">
-                                        
-                                        {% for project_image in project.projectimage_set.all %}
-                                            {% with dynamic_path='img/projects' %}
-                                                <img src="{% static dynamic_path %}{{ project_image.image.url }}" alt="Example Image">
-                                            {% endwith %}
-                                        
-                                        {% endfor %}
+                                      {% for project_image in project.projectimage_set.all %}
+                                        {% with dynamic_path='img/projects' %}
+                                          <img src="{% static dynamic_path %}{{ project_image.image.url }}" alt="Project Image">
+                                        {% endwith %}
+                                      {% endfor %}
                                         <a href="#" class="blog_item_date">
                                             <h3>{{ project.created_at|date:"d" }}</h3>
                                             <p>{{ project.created_at|date:"M" }}</p>
@@ -338,20 +224,21 @@
                                         <a class="d-inline-block" href="#">
                                             <h2>{{ project.title|truncatechars_html:15 }}</h2>
                                         </a>
-                                        <p>{{ project.description|truncatechars_html:60  }}</p>
+                                        <p>{{ project.description|truncatechars_html:60 }}</p>
                                         <ul class="blog-info-link">
                                             {% if project.category %}
                                             <li><a href="#"><i class="fa fa-user"></i> {{ project.category.name|truncatechars_html:10 }}</a></li>
                                             {% else %}
                                             <li><a href="#"><i class="fa fa-user"></i> Uncategorized</a></li>
-                                            {% endif %} <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                            {% endif %}
+                                            <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                                         </ul>
                                     </div>
                                 </article>
                             </div>
                             {% endfor %}
                         </div>
-
+                        <div id="message" style="display: none;">No results found.</div>
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
@@ -459,7 +346,8 @@
                                 <li>
                                     <div class="thumb">
                                         <a href="#">
-                                            <img src="img/news/news_1.png" alt="">
+                                            <img src="{% static 'img/news/news_1.png' %}" alt="">
+                                            
                                         </a>
                                     </div>
                                     <div class="info">
@@ -473,7 +361,7 @@
                                 <li>
                                     <div class="thumb">
                                         <a href="#">
-                                            <img src="img/news/news_2.png" alt="">
+                                            <img src="{% static 'img/news/news_2.png' %}" alt="">
                                         </a>
                                     </div>
                                     <div class="info">
@@ -537,7 +425,83 @@
      <script src="{% static 'js/main.js' %}"></script>
 
  
+     <script>
 
+        document.getElementById('searchForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const query = formData.get('query');
+            const response = await fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ query: query })
+            });
+            const data = await response.json();
+            console.log("images data :",data)
+            updateProjectResults(data);
+        });
+
+        function truncateString(str, num) {
+            if (str.length > num) {
+                return str.slice(0, num) + '...';
+            } else {
+                return str;
+            }
+        }
+
+        function updateProjectResults(data) {
+        const resultsContainer = document.getElementById('projectResults');
+        resultsContainer.innerHTML = '';
+        data.forEach(project => {
+            const projectElement = document.createElement('div');
+            projectElement.classList.add('col-md-6');
+            let imagesHtml = '';
+            project.image_urls.forEach(imageUrl => {
+                imagesHtml += `
+                    <img src="{% static 'img/projects/' %}${imageUrl}" alt="Project Image">
+                `;
+            });
+            projectElement.innerHTML = `
+                <article class="blog_item ${project.highlight ? 'highlight' : ''}">
+                    <div class="blog_item_img">
+                        ${imagesHtml}
+                        
+                        <a href="#" class="blog_item_date">
+                            <h3>${new Date(project.created_at).getDate()}</h3>
+                            <p>${new Date(project.created_at).toLocaleString('default', { month: 'short' })}</p>
+                        </a>
+                    </div>
+                    <div class="blog_details">
+                        <a class="d-inline-block" href="#">
+                            <h2>${truncateString(project.title, 15)}</h2>
+                        </a>
+                        <p>${truncateString(project.description, 60)}</p>
+                        <ul class="blog-info-link">
+                            <li><a href="#"><i class="fa fa-user"></i> ${truncateString(project.category || 'Uncategorized', 10)}</a></li>
+                            <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                        </ul>
+                    </div>
+                </article>
+            `;
+            resultsContainer.appendChild(projectElement);
+        });
+    }
+
+    function showMessage(message) {
+        const messageContainer = document.getElementById('message');
+        messageContainer.innerText = message;
+        messageContainer.style.display = 'block';
+    }
+
+    function hideMessage() {
+        const messageContainer = document.getElementById('message');
+        messageContainer.style.display = 'none';
+    }
+
+    </script>
 
     <script>
         $('.datepicker').datepicker({
@@ -555,7 +519,101 @@
         });
     $(document).ready(function() {
     $('.js-example-basic-multiple').select2();
-});
+    });
     </script>
+
+    <script>
+       const categoryUrl = '/projects/projects/category/'; // Replace with your actual endpoint
+    const typeUrl = '/projects/projects/project_type/'; // Replace with your actual endpoint
+
+    async function fetchCategories() {
+        try {
+            const response = await fetch(categoryUrl);
+            const categories = await response.json();
+            const categoryList = document.getElementById('categoryList');
+            categoryList.innerHTML = ''; // Clear existing content before populating
+            categories.forEach(category => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<a href="#" class="category">${category.name}</a>`;
+                categoryList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }
+
+    async function fetchTypes() {
+        try {
+            const response = await fetch(typeUrl);
+            const types = await response.json();
+            const typeList = document.getElementById('typeList');
+            typeList.innerHTML = ''; // Clear existing content before populating
+            types.forEach(type => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<a href="#" class="type">${type.type_name}</a>`;
+                typeList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error('Error fetching types:', error);
+        }
+    }
+
+    fetchCategories();
+    fetchTypes();
+
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const categoryList = document.getElementById('categoryList');
+        const typeList = document.getElementById('typeList');
+
+        // Add event listener to categories
+        categoryList.addEventListener('click', function (event) {
+            if (event.target.classList.contains('category')) {
+                const category = event.target.textContent.trim();
+                searchProjects(category);
+            }
+        });
+
+        // Add event listener to types
+        typeList.addEventListener('click', function (event) {
+            if (event.target.classList.contains('type')) {
+                const type = event.target.textContent.trim();
+                searchProjects(null, type);
+            }
+        });
+    });
+
+    async function searchProjects(category = null, type = null) {
+        const formData = new FormData(document.getElementById('searchForm'));
+        const query = formData.get('query');
+
+        const requestData = { query: query };
+        if (category) {
+            requestData.category = category;
+        }
+        if (type) {
+            requestData.type = type;
+        }
+
+        try {
+            const response = await fetch('/projects/search/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify(requestData)
+            });
+            const data = await response.json();
+            console.log("images data :", data);
+            updateProjectResults(data);
+        } catch (error) {
+            console.error('Error searching projects:', error);
+        }
+    }
+</script>
+
 </body>
 </html>

@@ -14,6 +14,7 @@ router.register(r'project_type', ProjectTypeViewSet)
 
 
 urlpatterns = [
-     path('', views.projects, name='projects'),
-   
+    path('home/', views.projects, name='projects'),
+    path('search/', views.search_projects, name='search_projects'),
+    path('projects/', include(router.urls)),
 ]
