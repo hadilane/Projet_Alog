@@ -1,0 +1,19 @@
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import *
+from . import views
+
+router = DefaultRouter()
+router.register(r'category', CategoryViewSet)
+router.register(r'project', ProjectViewSet)
+router.register(r'project_image', ProjectImageViewSet)
+router.register(r'project_skill', ProjectSkillViewSet)
+router.register(r'volunteer_application', VolunteerApplicationViewSet)
+router.register(r'donation', DonationViewSet)
+router.register(r'project_type', ProjectTypeViewSet)
+
+
+urlpatterns = [
+     path('', views.projects, name='projects'),
+   
+]

@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'captcha',
     'api_users.apps.UsersConfig',
+    'Projects.apps.ProjectsConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -62,7 +64,10 @@ ROOT_URLCONF = 'AlogProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'api_users/templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'api_users/templates'),
+            os.path.join(BASE_DIR, 'Projects/templates'),  # Add this line for your 'projects' app
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,9 +99,17 @@ SIMPLE_JWT = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+   'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'charity',
+        'USER': 'root',  
+        'PASSWORD': '',  
+        'HOST': '127.0.0.1',  
+        'PORT': '3306',  
+    },
+    'db2': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'charity2',
         'USER': 'root',  
         'PASSWORD': '',  
         'HOST': '127.0.0.1',  
@@ -104,6 +117,8 @@ DATABASES = {
     }
     
 }
+
+DATABASE_ROUTERS = ['AlogProject.db_router.DatabaseRouter']
 
 
 # Password validation
