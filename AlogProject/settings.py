@@ -54,8 +54,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.cache.UpdateCacheMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
+
     
 ]
+
+CACHE_MIDDLEWARE_SECONDS = 30
 
 ROOT_URLCONF = 'AlogProject.urls'
 
@@ -100,12 +105,27 @@ DATABASES = {
         'USER': 'root',  
         'PASSWORD': '',  
         'HOST': '127.0.0.1',  
-        'PORT': '3306',  
+        'PORT': '3307',  
     }
     
 }
 
+# settings.py
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6360/0',
+      
+    }
+}
 
+# Celery Configuration for async tasks
+CELERY_BROKER_URL = 'redis://localhost:6360/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6360/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

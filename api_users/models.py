@@ -6,6 +6,9 @@ class SimpleUser(AbstractUser):
     role = models.CharField(max_length=10, choices=[('volunteer', 'Volunteer'), ('public', 'Public')], default='public')
     phone = models.CharField(max_length=10, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
+    username = models.CharField(max_length=50, unique=True)
+    password = models.CharField(max_length=128)
+    email = models.EmailField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     groups = models.ManyToManyField(
@@ -25,6 +28,8 @@ class SimpleUser(AbstractUser):
         verbose_name='user permissions',
         related_query_name='user',
     )
+    def __str__(self):
+        return self.username
 
 # Skill model
 class Skill(models.Model):

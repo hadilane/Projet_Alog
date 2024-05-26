@@ -5,7 +5,7 @@ from .models import *
 class SimpleUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SimpleUser
-        fields = ['id', 'username', 'email', 'role', 'phone', 'bio', 'created_at', 'updated_at']
+        fields =  '__all__'
 
 # Serializer for Skill model
 class SkillSerializer(serializers.ModelSerializer):
