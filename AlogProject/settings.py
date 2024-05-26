@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'captcha',
     'api_users.apps.UsersConfig',
+    'Projects.apps.ProjectConfig',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,8 @@ ROOT_URLCONF = 'AlogProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'api_users/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'api_users/templates'),os.path.join(BASE_DIR, 'Projects/templates')],
+        
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

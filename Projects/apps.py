@@ -7,8 +7,8 @@ from django.apps import AppConfig
  """
 
 class ProjectConfig(AppConfig):
-    name = 'app_project'
+    name = 'Projects'
 
-    def ready(self):
+"""     def ready(self):
         from . import subscriber
-        subscriber.start_listener()
+        subscriber.start_listener() """
