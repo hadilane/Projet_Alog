@@ -8,7 +8,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import SimpleUser
 from django.core.cache import cache
-from .tasks import notify_project_service
+from .tasks import notify_project_service,simple_task
+import json
 
 # Viewsets for User model
 class SimpleUserViewSet(viewsets.ModelViewSet):
@@ -38,8 +39,6 @@ class AdminViewSet(viewsets.ModelViewSet):
 def home(request):
     return render(request, 'home.html')
 
-
-
 def register_user(request):
     if request.method == "POST":
         # Registration logic
@@ -55,7 +54,12 @@ def register_user(request):
         cache.set('users_count', users_count)
 
         # Notify other services
-        notify_project_service.delay({"event": "new_user", "username": username})
+        event_data = {"event": "new_user", "username": username}
+        notify_project_service.delay(event_data)  # Pass the data directly
 
         return HttpResponse(f"User registered. Total users: {users_count}")
     return render(request, 'register.html')
+
+def trigger_simple_task(request):
+    simple_task.delay()
+    return HttpResponse("Simple task triggered")
