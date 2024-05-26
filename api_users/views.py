@@ -44,9 +44,11 @@ def register_user(request):
         # Registration logic
         username = request.POST.get('username')
         password = request.POST.get('password')
+        first_name = request.POST.get('first_name')
+        phone = request.POST.get('phone')
         email = request.POST.get('email')
-
-        user = SimpleUser(username=username, password=password, email=email)
+        last_name = request.POST.get('last_name')
+        user = SimpleUser(username=username, password=password, email=email,firstName=first_name,lastName=last_name,phone=phone)
         user.save()
 
         # Cache user count

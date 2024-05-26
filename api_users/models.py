@@ -3,8 +3,11 @@ from django.contrib.auth.models import AbstractUser
 
 # User model
 class SimpleUser(AbstractUser):
+    user_id = models.AutoField(primary_key=True)
     role = models.CharField(max_length=10, choices=[('volunteer', 'Volunteer'), ('public', 'Public')], default='public')
-    phone = models.CharField(max_length=10, blank=True, null=True)
+    phone = models.CharField(max_length=14, blank=True, null=True)
+    firstName = models.CharField(max_length=50, blank=True, null=True)
+    lastName = models.CharField(max_length=50, blank=True, null=True) 
     bio = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=50, unique=True)
     password = models.CharField(max_length=128)
@@ -33,6 +36,7 @@ class SimpleUser(AbstractUser):
 
 # Skill model
 class Skill(models.Model):
+    skill_id = models.AutoField(primary_key=True)
     skill = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -44,6 +48,7 @@ class UserSkill(models.Model):
 
 # Organization model
 class Organization(models.Model):
+    organization_id =  models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     website = models.URLField(max_length=100, blank=True, null=True)
@@ -52,6 +57,7 @@ class Organization(models.Model):
 
 # Admin model
 class Admin(models.Model):
+    admin_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     password_hash = models.CharField(max_length=255)
