@@ -13,6 +13,9 @@ from rest_framework.decorators import api_view
 from elasticsearch import Elasticsearch
 from django.utils.text import slugify
 import re
+from django.http import HttpResponse
+from django.core.cache import cache
+from django.shortcuts import render, get_object_or_404
 
 ELASTIC_HOST = 'http://localhost:9200/'
 
@@ -144,3 +147,28 @@ def category_type_view(request):
     types = ProjectTypeViewSet.as_view({'get': 'list'})(request).data
     context = {'categories': categories, 'types': types}
     return render(request, 'your_template.html', context)
+
+
+
+def create_project(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        project = Project(title=title, description=description)
+        project.save()
+
+        return HttpResponse(f"Project created: {project.title}")
+    return render(request, 'create_project.html')
+
+def user_detail(request, username):
+    user = get_object_or_404(SimpleUser, username=username)
+    return render(request, 'home.html', {'user': user})
+
+def display_cached_user(request, user_id):
+    # Retrieve cached user data
+    user = cache.get(f'user_{user_id}')
+    if user:
+        return HttpResponse(f"User {user.username} found in cache.")
+    else:
+        return HttpResponse("User not found in cache.")

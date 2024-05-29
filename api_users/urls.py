@@ -11,4 +11,6 @@ router.register(r'admin', AdminViewSet)
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('register/', views.register_user, name='register'),
+    path('trigger-simple-task/', views.trigger_simple_task, name='trigger_simple_task'),   
 ]

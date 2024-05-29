@@ -17,4 +17,5 @@ urlpatterns = [
     path('home/', views.projects, name='projects'),
     path('search/', views.search_projects, name='search_projects'),
     path('projects/', include(router.urls)),
+    path('user/<str:username>/', views.user_detail, name='user_detail'),
 ]

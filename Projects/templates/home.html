@@ -1,0 +1,372 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Charifit</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div class="header-top_area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-12 col-lg-8">
+                            <div class="short_contact_list">
+                                <ul>
+                                    <li><a href="#"> <i class="fa fa-phone"></i> +23 0202020202</a></li>
+                                    <li><a href="#"> <i class="fa fa-envelope"></i>OurEntreprise@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6 col-lg-4">
+                            <div class="social_media_links d-none d-lg-block">
+                                <a href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-pinterest-p"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-3">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="{% static 'img/logo.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="main-menu">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="index.html">home</a></li>
+                                        <li><a href="About.html">About</a></li>
+                                        <li><a href="blog.html">Projects</a>
+                                        </li>
+                                        <li><a href="#">Community</a>
+                                        </li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                                <div class="Appointment">
+                                    <div class="book_btn d-none d-lg-block">
+                                        <a data-scroll-nav='1' href="#">Make a Donate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="single_slider  d-flex align-items-center slider_bg_1 overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="slider_text ">
+                            <span>Hello</span>
+                            <span> {{ user.first_name }}   {{ user.last_name }}</span>
+                            <h3> Help people
+                                When They Need</h3>
+                            <p>With so much to consume and such little time, coming up <br>
+                                with relevant title ideas is essential</p>
+                            <a href="About.html" class="boxed-btn3">Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider_area_end -->
+
+    <!-- reson_area_start  -->
+    <div class="reson_area section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb-55">
+                        <h3><span>Reason of Helping</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_reson">
+                        <div class="thum">
+                            <div class="thum_1">
+                                <img src="{% static 'img/help/1.png' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="help_content">
+                            <h4>Collecting Fund</h4>
+                            <p>Supporting families affected by natural disasters through financial assistance.</p>
+                            <a href="#" class="read_more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_reson">
+                        <div class="thum">
+                            <div class="thum_1">
+                                <img src="{% static 'img/help/2.png' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="help_content">
+                            <h4>Blood Camp</h4>
+                            <p>Organizing blood donation camps to save lives and support healthcare systems.</p>
+                            <a href="#" class="read_more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_reson">
+                        <div class="thum">
+                            <div class="thum_1">
+                                <img src="{% static 'img/help/3.png' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="help_content">
+                            <h4>Friendly Volunteer</h4>
+                            <p>Joining hands with communities to provide support and assistance through volunteering.</p>
+                            <a href="#" class="read_more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- reson_area_end  -->
+
+    <!-- latest_activites_area_start  -->
+    <div class="latest_activites_area">
+        <div class=" video_bg_1 video_activite  d-flex align-items-center justify-content-center">
+            <a class="popup-video" href="https://www.youtube.com/watch?v=MG3jGHnBVQs">
+                <i class="flaticon-ui"></i>
+            </a>
+        </div>
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-lg-7">
+                    <div class="activites_info">
+                        <div class="section_title">
+                            <h3> <span>Watch Our Latest  </span><br>
+                                Activities</h3>
+                        </div>
+                        <p class="para_1">See how we're making a difference in communities:</p class="para_1">
+                        <p class="para_2">From providing shelter to homeless families to supporting education initiatives in underprivileged areas, we're committed to creating positive change.</p>
+                        <a href="#" data-scroll-nav='1' class="boxed-btn4">Donate Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- latest_activites_area_end  -->
+
+    <!-- popular_causes_area_start  -->
+    <div class="popular_causes_area section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb-55">
+                        <h3><span>Popular Causes</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="causes_active owl-carousel">
+                        <div class="single_cause">
+                            <div class="thumb">
+                                <img src="{% static 'img/causes/1.png' %}" alt="">
+                            </div>
+                            <div class="causes_content">
+                                <div class="custom_progress_bar">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="progres_count">
+                                                30%
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="balance d-flex justify-content-between align-items-center">
+                                    <span>Raised: 50000.00 DA </span>
+                                    <span>Goal: 90000.00 DA</span>
+                                </div>
+                                <h4>Help us to Send Food</h4>
+                                <p>The passage is attributed to an 
+                                    unknown typesetter in the century 
+                                    who is thought</p>
+                                <a class="read_more" href="cause_details.html">Read More</a>
+                            </div>
+                        </div>
+                        <div class="single_cause">
+                            <div class="thumb">
+                                <img src="{% static 'img/causes/2.png' %}" alt="">
+                            </div>
+                            <div class="causes_content">
+                                <div class="custom_progress_bar">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="progres_count">
+                                                30%
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="balance d-flex justify-content-between align-items-center">
+                                    <span>Raised: 50000.00 DA </span>
+                                    <span>Goal: 90000.00 DA</span>
+                                </div>
+                                <h4>Clothes For Everyone</h4>
+                                <p>The passage is attributed to an 
+                                    unknown typesetter in the century 
+                                    who is thought</p>
+                                <a class="read_more" href="cause_details.html">Read More</a>
+                            </div>
+                        </div>
+                        <div class="single_cause">
+                            <div class="thumb">
+                                <img src="{% static 'img/causes/3.png' %}" alt="">
+                            </div>
+                            <div class="causes_content">
+                                <div class="custom_progress_bar">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="progres_count">
+                                                30%
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="balance d-flex justify-content-between align-items-center">
+                                    <span>Raised: 50000.00 DA </span>
+                                    <span>Goal: 90000.00 DA</span>
+                                </div>
+                                <h4>Water For All Children</h4>
+                                <p>The passage is attributed to an 
+                                    unknown typesetter in the century 
+                                    who is thought</p>
+                                <a class="read_more" href="cause_details.html">Read More</a>
+                            </div>
+                        </div>
+                        <div class="single_cause">
+                            <div class="thumb">
+                                <img src="{% static 'img/causes/1.png' %}" alt="">
+                            </div>
+                            <div class="causes_content">
+                                <div class="custom_progress_bar">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="progres_count">
+                                                30%
+                                            </span>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="balance d-flex justify-content-between align-items-center">
+                                    <span>Raised: 50000.00 DA </span>
+                                    <span>Goal: 90000.00 DA</span>
+                                </div>
+                                <h4>Help us to Send Food</h4>
+                                <p>The passage is attributed to an 
+                                    unknown typesetter in the century 
+                                    who is thought</p>
+                                <a class="read_more" href="cause_details.html">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- popular_causes_area_end  -->
+
+    <!-- counter_area_start  -->
+    <div class="counter_area">
+        <div class="container">
+            <div class="counter_bg overlay">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single_counter d-flex align-items-center justify-content-center">
+                            <div class="icon">
+                                <i class="flaticon-calendar"></i>
+                            </div>
+                            <div class="events">
+                                <h3 class="counter">1500</h3>
+                                <p>Total Projects</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single_counter d-flex align-items-center justify-content-center">
+                            <div class="icon">
+                                <i class="flaticon-heart-beat"></i>
+                            </div>
+                            <div class="events">
+                                <h3 class="counter">350</h3>
+                                <p>Finished Projects</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single_counter d-flex align-items-center justify-content-center">
+                            <div class="icon">
+                                <i class="flaticon-in-love"></i>
+                            </div>
+                            <div class="events">
+                                <h3 class="counter">800</h3>
+                                <p>Qualified Volunteers</p>
+                            </div>
+                        </div>
