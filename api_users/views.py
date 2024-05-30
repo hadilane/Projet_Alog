@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
+import requests
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
@@ -41,34 +43,45 @@ def home(request):
 
 def register_user(request):
     if request.method == "POST":
-        # Registration logic
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        first_name = request.POST.get('first_name')
-        phone = request.POST.get('phone')
-        email = request.POST.get('email')
-        last_name = request.POST.get('last_name')
-        user = SimpleUser(username=username, password=password, email=email, first_name=first_name,last_name=last_name,phone=phone)
-        user.save()
-
-        # Cache user count
-        users_count = SimpleUser.objects.count()
-        cache.set('users_count', users_count)
-        # Cache the user object
-        cache.set(f'user_{user.user_id}', user)
-        # Notify other services
-        event_data = {
-            "event": "new_user",
-            "username": username,
-            "first_name": first_name,
-            "last_name": last_name,
-            "email": email,
-            "phone": phone
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+        data = {
+            'secret': settings.RECAPTCHA_PRIVATE_KEY,
+            'response': recaptcha_response
         }
-        notify_project_service.delay(event_data)
+        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+        result = r.json()
+        if result['success']:
+            # Registration logic
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            first_name = request.POST.get('first_name')
+            phone = request.POST.get('phone')
+            email = request.POST.get('email')
+            last_name = request.POST.get('last_name')
+            user = SimpleUser(username=username, password=password, email=email, first_name=first_name,last_name=last_name,phone=phone)
+            user.save()
 
-        return redirect('user_detail', username=username)
-    return render(request, 'register.html')
+            # Cache user count
+            users_count = SimpleUser.objects.count()
+            cache.set('users_count', users_count)
+            # Cache the user object
+            """  cache.set(f'user_{user.user_id}', user) """
+            # Notify other services
+            event_data = {
+                "event": "new_user",
+                "username": username,
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
+                "phone": phone
+            }
+            notify_project_service.delay(event_data)
+
+            return redirect('user_detail', username=username)
+        else:
+            return HttpResponse("Invalid reCAPTCHA. Please try again.")
+    return render(request, 'register.html', {'recaptcha_public_key': settings.RECAPTCHA_PUBLIC_KEY}
+)
 
 def trigger_simple_task(request):
     simple_task.delay()

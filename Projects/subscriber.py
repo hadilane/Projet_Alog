@@ -27,6 +27,8 @@ import redis
 import json
 import django
 import os
+from django.conf import settings
+from threading import Thread
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'AlogProject.settings')
 django.setup()
@@ -58,3 +60,19 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+def listen_to_user_service():
+    r = redis.Redis.from_url(settings.CACHES['default']['LOCATION'])
+    pubsub = r.pubsub()
+    pubsub.subscribe('project_channel')
+
+    for message in pubsub.listen():
+        if message['type'] == 'message':
+            handle_message(message['data'])
+
+def handle_message(data):
+    # Logic to handle messages from other services
+    print(f"Received message: {data}")
+def start_listener():
+    listener_thread = Thread(target=listen_to_user_service)
+    listener_thread.start()

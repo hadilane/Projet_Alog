@@ -28,6 +28,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
 <!--===============================================================================================-->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function validateRecaptcha(event) {
+            event.preventDefault(); // Prevent form submission
+            var recaptchaResponse = grecaptcha.getResponse();
+            if (recaptchaResponse.length === 0) {
+                alert("Please verify that you are not a robot.");
+            } else {
+                document.getElementById("login-form").submit(); // Submit the form if reCAPTCHA is validated
+            }
+        }
+    </script>
 </head>
 {% comment %} <body>
     
@@ -163,8 +175,9 @@
                         </label>
                     </div> {% endcomment %}
                 
+                    <div class="g-recaptcha" data-sitekey="6LeAwugpAAAAAJFaJRxrgMaoLxA0NPHW2iGbeR5k"></div>
                     <div class="container-login100-form-btn">
-                        <button type="submit" id="login-btn" class="login100-form-btn">
+                        <button type="submit" class="login100-form-btn" onclick="validateRecaptcha(event)">
                             Register
                         </button>
                     </div>

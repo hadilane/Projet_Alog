@@ -30,7 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+RECAPTCHA_PUBLIC_KEY = '6LeAwugpAAAAAJFaJRxrgMaoLxA0NPHW2iGbeR5k'
+RECAPTCHA_PRIVATE_KEY = '6LeAwugpAAAAAPKJma1b_xDrztIQslpXgqVTSmMT'
 # Application definition
 
 INSTALLED_APPS = [
@@ -89,6 +90,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
