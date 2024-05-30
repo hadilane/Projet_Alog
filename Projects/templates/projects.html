@@ -241,24 +241,34 @@
                         <div id="message" style="display: none;">No results found.</div>
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
-                                        <i class="ti-angle-right"></i>
-                                    </a>
-                                </li>
+                                {% if projects.has_previous %}
+                                    <li class="page-item">
+                                        <a href="?page={{ projects.previous_page_number }}" class="page-link" aria-label="Previous">
+                                            <i class="ti-angle-left"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% for num in projects.paginator.page_range %}
+                                    {% if projects.number == num %}
+                                        <li class="page-item active">
+                                            <a href="#" class="page-link">{{ num }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if projects.has_next %}
+                                    <li class="page-item">
+                                        <a href="?page={{ projects.next_page_number }}" class="page-link" aria-label="Next">
+                                            <i class="ti-angle-right"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </nav>
+                        
                     </div>
                 </div>
                 
@@ -427,35 +437,32 @@
  
      <script>
 
-        document.getElementById('searchForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const query = formData.get('query');
-            const response = await fetch(this.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'
-                },
-                body: JSON.stringify({ query: query })
-            });
-            const data = await response.json();
-            console.log("images data :",data)
-            updateProjectResults(data);
+    document.getElementById('searchForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const query = formData.get('query');
+        const response = await fetch(this.action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ query: query })
         });
+        const data = await response.json();
+        updateProjectResults(data);
+    });
 
-        function truncateString(str, num) {
-            if (str.length > num) {
-                return str.slice(0, num) + '...';
-            } else {
-                return str;
-            }
-        }
+    async function loadPage(pageNumber) {
+        const response = await fetch(`/projects/?page=${pageNumber}`);
+        const data = await response.json();
+        updateProjectResults(data);
+    }
 
-        function updateProjectResults(data) {
+    function updateProjectResults(data) {
         const resultsContainer = document.getElementById('projectResults');
         resultsContainer.innerHTML = '';
-        data.forEach(project => {
+        data.projects.forEach(project => {
             const projectElement = document.createElement('div');
             projectElement.classList.add('col-md-6');
             let imagesHtml = '';
@@ -468,7 +475,6 @@
                 <article class="blog_item ${project.highlight ? 'highlight' : ''}">
                     <div class="blog_item_img">
                         ${imagesHtml}
-                        
                         <a href="#" class="blog_item_date">
                             <h3>${new Date(project.created_at).getDate()}</h3>
                             <p>${new Date(project.created_at).toLocaleString('default', { month: 'short' })}</p>
@@ -488,7 +494,43 @@
             `;
             resultsContainer.appendChild(projectElement);
         });
+        updatePagination(data.page_obj);
     }
+
+    function updatePagination(pageObj) {
+        const paginationContainer = document.querySelector('.pagination');
+        paginationContainer.innerHTML = '';
+        if (pageObj.has_previous) {
+            paginationContainer.innerHTML += `
+                <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Previous" onclick="loadPage(${pageObj.previous_page_number})">
+                        <i class="ti-angle-left"></i>
+                    </a>
+                </li>
+            `;
+        }
+        for (let i = 1; i <= pageObj.num_pages; i++) {
+            paginationContainer.innerHTML += `
+                <li class="page-item ${pageObj.number === i ? 'active' : ''}">
+                    <a href="#" class="page-link" onclick="loadPage(${i})">${i}</a>
+                </li>
+            `;
+        }
+        if (pageObj.has_next) {
+            paginationContainer.innerHTML += `
+                <li class="page-item">
+                    <a href="#" class="page-link" aria-label="Next" onclick="loadPage(${pageObj.next_page_number})">
+                        <i class="ti-angle-right"></i>
+                    </a>
+                </li>
+            `;
+        }
+    }
+
+    function truncateString(str, num) {
+        return str.length > num ? str.slice(0, num) + '...' : str;
+    }
+
 
     function showMessage(message) {
         const messageContainer = document.getElementById('message');
@@ -613,7 +655,7 @@
             console.error('Error searching projects:', error);
         }
     }
-</script>
+ </script>
 
 </body>
 </html>

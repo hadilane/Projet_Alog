@@ -13,6 +13,7 @@ from rest_framework.decorators import api_view
 from elasticsearch import Elasticsearch
 from django.utils.text import slugify
 import re
+from django.core.paginator import Paginator
 
 ELASTIC_HOST = 'http://localhost:9200/'
 
@@ -59,9 +60,16 @@ class DonationViewSet(viewsets.ModelViewSet):
 # Template Views
 def projects(request):
     projects = Project.objects.all()
-    context = {'projects': projects}
-    return render(request, 'projects.html', context)
+    paginator = Paginator(projects, 5)  # Show 5 projects per page
 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'projects': page_obj,  # Update this to use page_obj for pagination
+    }
+    
+    return render(request, 'projects.html', context)
 
 # Elasticsearch function
 from elasticsearch_dsl import Q
